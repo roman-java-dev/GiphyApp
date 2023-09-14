@@ -8,6 +8,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HorizontalListActivity">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="0dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Find GIF" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/horizontal_recycler_view"
         android:layout_width="match_parent"

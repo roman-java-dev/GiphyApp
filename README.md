@@ -1,11 +1,12 @@
 # Giphy Android App
 
-This is a simple Android app that allows users to view GIFs from Giphy using the Giphy REST API.
+This is a simple Android app that allows users to search and view GIFs from Giphy using the Giphy REST API.
 
 ## Features
 
 - Display GIFs in a list or grid view.
 - View GIFs in full-screen mode.
+- Search for GIFs using keywords.
 
 ## Screenshots
 
@@ -31,6 +32,8 @@ This is a simple Android app that allows users to view GIFs from Giphy using the
 
 - Upon launching the app, you can choose from three different layouts: Vertical List, Horizontal List, or Grid.
 - Clicking on a GIF in any of the layouts will open a full-screen view of the selected GIF.
+- You can also search for specific GIFs by entering keywords in the search bar.
+
 
 ## API Key
 

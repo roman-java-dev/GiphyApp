@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import com.example.giphytasks.adapter.GifsAdapter
 import com.example.giphytasks.const.Layout
 import com.example.giphytasks.data.DataObject
 import com.example.giphytasks.data.DataResult
 import com.example.giphytasks.data.DataService
 import com.example.giphytasks.databinding.ActivityHorizontalListBinding
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,6 +68,45 @@ class HorizontalListActivity : AppCompatActivity() {
             override fun onFailure(call: Call<DataResult?>, t: Throwable) {
             }
 
+        })
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query!!.isNotEmpty()){
+                    retroService.searchGifs(query).enqueue(object : Callback<DataResult?> {
+                        override fun onResponse(
+                            call: Call<DataResult?>,
+                            response: Response<DataResult?>
+                        ) {
+                            val body = response.body()
+                            if (body == null) {
+                                Log.d(ContentValues.TAG, "onResponse: No response... ")
+                            }
+                            gifs.clear()
+                            gifs.addAll(body!!.res)
+                            if (gifs.isEmpty()){
+                                Snackbar.make(
+                                    binding.horizontalRecyclerView,
+                                    "No image was found for your request",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                            adapter.notifyDataSetChanged()
+                        }
+
+                        override fun onFailure(call: Call<DataResult?>, t: Throwable) {
+                        }
+                    }
+                    )
+                }
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                return true
+            }
         })
     }
 }
